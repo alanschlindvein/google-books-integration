@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 class BookCard extends React.Component {
   constructor(props) {
@@ -17,7 +17,11 @@ class BookCard extends React.Component {
     return (
       <li className="list-books__book-card">
         <Card onClick={this.handleBookCardClick}>
-          <CardTitle title={book.volumeInfo.title} subtitle={book.volumeInfo.publisher + ' (' + book.volumeInfo.publishedDate + ')'}/>
+          <CardHeader
+            title={book.volumeInfo.title}
+            subtitle={book.volumeInfo.publisher + ' (' + book.volumeInfo.publishedDate + ')'}
+            avatar={book.volumeInfo.imageLinks.thumbnail}
+            />
           <CardText>
             {book.volumeInfo.description}
           </CardText>

@@ -1,7 +1,8 @@
 import {SEARCH_BOOK, SHOW_BOOK} from '../constants/ActionTypes';
 
 const initialState = {
-  searchResult: {items: []}
+  searchResult: {items: []},
+  selectedBook: {}
 };
 
 export default function books(state = initialState, action) {
@@ -48,15 +49,18 @@ export default function books(state = initialState, action) {
                 ],
                 publisher: 'Springer',
                 publishedDate: '2008-06-03',
-                description: 'The Harry Potter books are the bestselling books of all time. In this fascinating study, Susan Gunelius analyzes every aspect of the brand phenomenon that is Harry Potter. Delving into price wars, box office revenue, and brand values, amongst other things, this is the story of the most incredible brand success there has ever been.'
+                description: 'The Harry Potter books are the bestselling books of all time. In this fascinating study, Susan Gunelius analyzes every aspect of the brand phenomenon that is Harry Potter. Delving into price wars, box office revenue, and brand values, amongst other things, this is the story of the most incredible brand success there has ever been.',
+                imageLinks: {
+                  smallThumbnail: 'http://books.google.com/books/content?id=C63mayArNqoC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api',
+                  thumbnail: 'http://books.google.com/books/content?id=C63mayArNqoC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api'
+                }
               }
             }]
         }
       };
 
     case SHOW_BOOK:
-      console.log(SHOW_BOOK, action);
-      return state;
+      return Object.assign({}, state, {selectedBook: action.book});
 
     default:
       return state;

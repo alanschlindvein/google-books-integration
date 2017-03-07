@@ -5,7 +5,7 @@ import SearchHeader from '../components/SearchHeader';
 import SearchResults from '../components/SearchResults';
 import * as Actions from '../actions/index';
 
-require('../../index.scss');
+import '../../index.scss';
 
 class BooksApp extends Component {
   render() {
