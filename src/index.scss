@@ -33,13 +33,15 @@ body {
 
 .book-details {
 
-  label {
-    display: block;
-    font-weight: 600;
+  &__item {
+    label {
+      display: block;
+      font-weight: 600;
+    }
   }
 
   &__open-content-container {
     text-align: center;
-    margin-bottom: 15px;
+    margin: 15px 0;
   }
 }
