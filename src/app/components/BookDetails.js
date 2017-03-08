@@ -76,6 +76,8 @@ class BookDetails extends Component {
 
         {volumeInfo.publishedDate && this.renderDeatail('Publicado em', volumeInfo.publishedDate)}
 
+        {volumeInfo.pageCount && this.renderDeatail('Páginas', volumeInfo.pageCount)}
+
         {volumeInfo.description && this.renderDeatail('Descrição', volumeInfo.description)}
 
         {accessInfo.webReaderLink && this.renderButtonOpenBook(accessInfo.webReaderLink)}
