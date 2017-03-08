@@ -13,7 +13,7 @@ class BooksApp extends Component {
     return (
       <div>
         <SearchHeader
-          searchBook={actions.getAllBooks}
+          searchBook={actions.requestBooks}
           />
         <SearchResults
           books={books}

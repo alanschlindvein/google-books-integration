@@ -1,13 +1,27 @@
-import * as types from '../constants/ActionTypes';
+const REQUEST = 'REQUEST';
+const SUCCESS = 'SUCCESS';
+const FAILURE = 'FAILURE';
 
-export function searchBook(text) {
-  return {type: types.SEARCH_BOOK, text};
+function createRequestTypes(base) {
+  return [REQUEST, SUCCESS, FAILURE].reduce((acc, type) => {
+    acc[type] = `${base}_${type}`;
+    return acc;
+  }, {});
 }
 
-export function getAllBooks(text) {
-  return {type: types.SEARCH_BOOK + '_REQUEST', text};
+export const BOOKS = createRequestTypes('BOOKS');
+
+export const OPEN_BOOK_DETAILS = 'OPEN_BOOK_DETAILS';
+
+function action(type, payload = {}) {
+  return {type, ...payload};
 }
 
-export function showBook(book) {
-  return {type: types.SHOW_BOOK, book};
-}
+export const books = {
+  request: text => action(BOOKS.REQUEST, {text}),
+  success: (text, books) => action(BOOKS.SUCCESS, {text, books}),
+  failure: (text, error) => action(BOOKS.FAILURE, {text, error})
+};
+
+export const requestBooks = books.request;
+export const showBookDetails = book => action(OPEN_BOOK_DETAILS, {book});

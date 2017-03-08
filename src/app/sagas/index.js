@@ -1,18 +1,19 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
-import {SEARCH_BOOK} from '../constants/ActionTypes';
-import Api from '../services';
+import {BOOKS, books} from '../actions';
+import api from '../services';
 
 function * fetchBooks(action) {
+  const text = action.text;
   try {
-    const books = yield call(Api.getBooks, action.text);
-    yield put({type: SEARCH_BOOK, books});
-  } catch (e) {
-    yield put({type: 'USER_FETCH_FAILED', message: e.message});
+    const booksResponse = yield call(api.getBooks, text);
+    yield put(books.success(text, booksResponse));
+  } catch (error) {
+    yield put(books.failure(text, error));
   }
 }
 
 function * mySaga() {
-  yield takeEvery(SEARCH_BOOK + '_REQUEST', fetchBooks);
+  yield takeEvery(BOOKS.REQUEST, fetchBooks);
 }
 
 export default mySaga;

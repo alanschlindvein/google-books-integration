@@ -1,4 +1,4 @@
-import {SEARCH_BOOK, SHOW_BOOK} from '../constants/ActionTypes';
+import * as ActionTypes from '../actions';
 
 const initialState = {
   searchResult: {items: []},
@@ -6,14 +6,15 @@ const initialState = {
 };
 
 export default function books(state = initialState, action) {
-  switch (action.type) {
-    case SEARCH_BOOK:
-      return Object.assign({}, state, {searchResult: action.books});
+  const actionType = action.type;
 
-    case SHOW_BOOK:
-      return Object.assign({}, state, {selectedBook: action.book});
-
-    default:
-      return state;
+  if (actionType === ActionTypes.BOOKS.SUCCESS) {
+    return {...state, searchResult: action.books};
   }
+
+  if (actionType === ActionTypes.OPEN_BOOK_DETAILS) {
+    return {...state, selectedBook: action.book};
+  }
+
+  return state;
 }

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import BookCard from './BookCard';
 
-function BooksList({booksList, showBook}) {
+function BooksList({booksList, showBookDetails}) {
   return (
     <div>
       <ul className="list-books">
@@ -9,7 +9,7 @@ function BooksList({booksList, showBook}) {
           <BookCard
             key={book.id}
             book={book}
-            showBook={showBook}
+            showBook={showBookDetails}
             />
         )}
       </ul>
@@ -19,7 +19,7 @@ function BooksList({booksList, showBook}) {
 
 BooksList.propTypes = {
   booksList: PropTypes.array.isRequired,
-  showBook: PropTypes.func.isRequired
+  showBookDetails: PropTypes.func.isRequired
 };
 
 export default BooksList;
