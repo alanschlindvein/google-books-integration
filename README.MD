@@ -15,6 +15,12 @@ https://www.googleapis.com/books/v1/volumes/C63mayArNqoC
 
 
 http://fountainjs.io/
+webpack + babel
+gulp
+react
+react-redux
+react-saga
+material-ui
 
 
 

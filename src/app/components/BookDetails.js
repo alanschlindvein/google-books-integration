@@ -2,16 +2,14 @@ import React, {PropTypes} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionOpenInNew from 'material-ui/svg-icons/action/open-in-new';
 
-const renderBookAtuthors = authors => (
-  <div>
-    <label>Autores</label>
-    {authors.map(author =>
-      <span
-        key={author}
-        >
-        {author}
-      </span>
-    )}
+const renderBookAuthors = authors => (
+  <div className="book-details__item book-details__authors">
+    <label>{'Autor' + (authors.length > 1 ? 'es' : '')}</label>
+    <ul>
+      {authors.map(author =>
+        <li key={author}>{author}</li>
+      )}
+    </ul>
   </div>
 );
 
@@ -25,7 +23,7 @@ const renderDeatail = (label, value) => (
 const renderButtonOpenBook = link => (
   <div className="book-details__open-content-container">
     <RaisedButton
-      label="Ver conteúdo..."
+      label="Ver conteúdo"
       labelPosition="before"
       icon={<ActionOpenInNew/>}
       href={link}
@@ -39,7 +37,7 @@ const BookDetails = ({book}) => (
     <h1>{book.volumeInfo.title}</h1>
 
     {book.volumeInfo.authors &&
-      renderBookAtuthors(book.volumeInfo.authors)
+      renderBookAuthors(book.volumeInfo.authors)
     }
 
     {book.volumeInfo.publisher &&
