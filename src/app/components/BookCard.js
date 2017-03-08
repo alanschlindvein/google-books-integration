@@ -23,7 +23,7 @@ class BookCard extends React.Component {
             avatar={book.volumeInfo.imageLinks.thumbnail}
             />
           <CardText>
-            {book.searchInfo}
+            {book.searchInfo.textSnippet}
           </CardText>
         </Card>
       </li>

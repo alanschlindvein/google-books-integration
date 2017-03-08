@@ -13,13 +13,11 @@ const renderBookDetails = (books, actions) => (
   </div>
 );
 
-function SearchResults({books, actions}) {
-  return (
-    <div>
-      {books.selectedBook ? renderBookDetails(books, actions) : renderBookList(books, actions)}
-    </div>
-  );
-}
+const SearchResults = ({books, actions}) => (
+  <div>
+    {books && books.selectedBook ? renderBookDetails(books, actions) : renderBookList(books, actions)}
+  </div>
+);
 
 SearchResults.propTypes = {
   actions: PropTypes.object.isRequired,

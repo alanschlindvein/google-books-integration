@@ -2,7 +2,7 @@ import {SEARCH_BOOK, SHOW_BOOK} from '../constants/ActionTypes';
 
 const initialState = {
   searchResult: {items: []},
-  selectedBook: {}
+  selectedBook: null
 };
 
 export default function books(state = initialState, action) {
@@ -34,6 +34,9 @@ export default function books(state = initialState, action) {
                   thumbnail: 'http://books.google.com/books/content?id=K_yxDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api'
                 },
                 language: 'pt'
+              },
+              searchInfo: {
+                textSnippet: 'Harry Potter e a Pedra Filosofal'
               }
             },
             {
@@ -54,6 +57,9 @@ export default function books(state = initialState, action) {
                   smallThumbnail: 'http://books.google.com/books/content?id=C63mayArNqoC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api',
                   thumbnail: 'http://books.google.com/books/content?id=C63mayArNqoC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api'
                 }
+              },
+              searchInfo: {
+                textSnippet: 'Gina Burkart chose to read the books with her own children. As they read together, she discovered many parallels between Christian faith and the themes of these books.'
               }
             }]
         }
