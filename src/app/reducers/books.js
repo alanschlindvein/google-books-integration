@@ -16,5 +16,9 @@ export default function books(state = initialState, action) {
     return {...state, selectedBook: action.book};
   }
 
+  if (actionType === ActionTypes.CLOSE_BOOK_DETAILS) {
+    return {...state, selectedBook: null};
+  }
+
   return state;
 }

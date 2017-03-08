@@ -9,7 +9,7 @@ const renderBookList = (books, actions) => (
 const renderBookDetails = (books, actions) => (
   <div>
     {renderBookList(books, actions)}
-    <BookDetails book={books.selectedBook}/>
+    <BookDetails book={books.selectedBook} {...actions}/>
   </div>
 );
 

@@ -32,6 +32,7 @@ body {
 }
 
 .book-details {
+  position: relative;
 
   &__item {
     label {
@@ -63,5 +64,11 @@ body {
   &__open-content-container {
     text-align: center;
     margin: 15px 0;
+  }
+
+  &__close-button {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 }

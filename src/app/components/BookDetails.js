@@ -1,65 +1,94 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes, Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
+import ContentClear from 'material-ui/svg-icons/content/clear';
 import ActionOpenInNew from 'material-ui/svg-icons/action/open-in-new';
 
-const renderBookAuthors = authors => (
-  <div className="book-details__item book-details__authors">
-    <label>{'Autor' + (authors.length > 1 ? 'es' : '')}</label>
-    <ul>
-      {authors.map(author =>
-        <li key={author}>{author}</li>
-      )}
-    </ul>
-  </div>
-);
+class BookDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.handleOnCloseDetails = this.handleOnCloseDetails.bind(this);
+  }
 
-const renderDeatail = (label, value) => (
-  <div className="book-details__item">
-    <label>{label}</label>
-    <span>{value}</span>
-  </div>
-);
+  handleOnCloseDetails() {
+    this.props.closeBookDetails();
+  }
 
-const renderButtonOpenBook = link => (
-  <div className="book-details__open-content-container">
-    <RaisedButton
-      label="Ver conteúdo"
-      labelPosition="before"
-      icon={<ActionOpenInNew/>}
-      href={link}
-      target="_blank"
-      />
-  </div>
-);
+  renderBookAuthors(authors) {
+    return (
+      <div className="book-details__item book-details__authors">
+        <label>{'Autor' + (authors.length > 1 ? 'es' : '')}</label>
+        <ul>
+          {authors.map(author =>
+            <li key={author}>{author}</li>
+          )}
+        </ul>
+      </div>
+    );
+  }
 
-const BookDetails = ({book}) => (
-  <div className="book-details">
-    <h1>{book.volumeInfo.title}</h1>
+  renderDeatail(label, value) {
+    return (
+      <div className="book-details__item">
+        <label>{label}</label>
+        <span>{value}</span>
+      </div>
+    );
+  }
 
-    {book.volumeInfo.authors &&
-      renderBookAuthors(book.volumeInfo.authors)
-    }
+  renderButtonOpenBook(link) {
+    return (
+      <div className="book-details__open-content-container">
+        <RaisedButton
+          label="Ver conteúdo"
+          labelPosition="before"
+          icon={<ActionOpenInNew/>}
+          href={link}
+          target="_blank"
+          />
+      </div>
+    );
+  }
 
-    {book.volumeInfo.publisher &&
-      renderDeatail('Editora', book.volumeInfo.publisher)
-    }
+  renderButtonCloseDetails() {
+    return (
+      <div className="book-details__close-button">
+        <IconButton
+          tooltip="Fechar detalhes"
+          tooltipPosition={'bottom-left'}
+          onTouchTap={this.handleOnCloseDetails}
+          >
+          <ContentClear/>
+        </IconButton>
+      </div>
+    );
+  }
 
-    {book.volumeInfo.publishedDate &&
-      renderDeatail('Publicado em', book.volumeInfo.publishedDate)
-    }
+  render() {
+    const {volumeInfo, accessInfo} = this.props.book;
+    return (
+      <div className="book-details">
+        <h1>{volumeInfo.title}</h1>
 
-    {book.volumeInfo.description &&
-      renderDeatail('Descrição', book.volumeInfo.description)
-    }
+        {volumeInfo.authors && this.renderBookAuthors(volumeInfo.authors)}
 
-    {book.selfLink &&
-      renderButtonOpenBook(book.selfLink)
-    }
-  </div>
-);
+        {volumeInfo.publisher && this.renderDeatail('Editora', volumeInfo.publisher)}
+
+        {volumeInfo.publishedDate && this.renderDeatail('Publicado em', volumeInfo.publishedDate)}
+
+        {volumeInfo.description && this.renderDeatail('Descrição', volumeInfo.description)}
+
+        {accessInfo.webReaderLink && this.renderButtonOpenBook(accessInfo.webReaderLink)}
+
+        {this.renderButtonCloseDetails()}
+      </div>
+    );
+  }
+}
 
 BookDetails.propTypes = {
-  book: PropTypes.object.isRequired
+  book: PropTypes.object.isRequired,
+  closeBookDetails: PropTypes.func.isRequired
 };
 
 export default BookDetails;
