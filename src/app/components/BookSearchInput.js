@@ -8,6 +8,7 @@ class BookSearchInput extends Component {
     this.state = {text: ''};
     this.handleSearch = this.handleSearch.bind(this);
     this.handleChangeInput = this.handleChangeInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSearch() {
@@ -18,6 +19,12 @@ class BookSearchInput extends Component {
     this.setState({text: event.target.value});
   }
 
+  handleSubmit(event) {
+    const text = event.target.value.trim();
+    if (event.which === 13) {
+      this.props.onSearch(text);
+    }
+  }
   render() {
     return (
       <div>
@@ -26,6 +33,7 @@ class BookSearchInput extends Component {
           type="text"
           placeholder="Pesquise um livro..."
           onChange={this.handleChangeInput}
+          onKeyDown={this.handleSubmit}
           autoFocus="true"
           />
         <RaisedButton
