@@ -1,30 +1,63 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes, Component} from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 import BooksList from './BooksList';
 import BookDetails from './BookDetails';
 
-const renderBookList = (books, actions) => (
-  <div>
-    {books.searchResult.totalItems &&
-    <div className="search-results__total-itens">
-      {`Foram encontrados ${books.searchResult.totalItems} livros`}
-    </div>
-    }
-    <BooksList booksList={books.searchResult.items} {...actions}/>
-  </div>
-);
+class SearchResults extends Component {
+  constructor(props) {
+    super(props);
+    this.handleLoadMore = this.handleLoadMore.bind(this);
+  }
 
-const renderBookDetails = (books, actions) => (
-  <div>
-    {renderBookList(books, actions)}
-    <BookDetails book={books.selectedBook} {...actions}/>
-  </div>
-);
+  handleLoadMore() {
+    const {text, startIndex, maxResults} = this.props.books.filter;
+    const filter = {text, startIndex: startIndex + maxResults};
+    this.props.actions.requestBooks(filter);
+  }
 
-const SearchResults = ({books, actions}) => (
-  <div className="search-results">
-    {books && books.selectedBook ? renderBookDetails(books, actions) : renderBookList(books, actions)}
-  </div>
-);
+  renderTotalResultMessage(totalItems) {
+    return <div className="search-results__total-itens">{`Foram encontrados ${totalItems} livros`}</div>;
+  }
+
+  renderBookList(books, actions) {
+    const PAGE_SIZE = books.filter.maxResults;
+    return (
+      <div>
+        {books.searchResult.totalItems && this.renderTotalResultMessage(books.searchResult.totalItems)}
+
+        <BooksList booksList={books.searchResult.items} {...actions}/>
+
+        {books.searchResult.totalItems > PAGE_SIZE &&
+        <div className="search-results__load-more">
+          <RaisedButton
+            label="Carregar mais"
+            secondary
+            onTouchTap={this.handleLoadMore}
+            />
+        </div>
+        }
+      </div>
+    );
+  }
+
+  renderBookDetails(books, actions) {
+    return (
+      <div>
+        {this.renderBookList(books, actions)}
+        <BookDetails book={books.selectedBook} {...actions}/>
+      </div>
+    );
+  }
+
+  render() {
+    const {books, actions} = this.props;
+    return (
+      <div className="search-results">
+        {books && books.selectedBook ? this.renderBookDetails(books, actions) : this.renderBookList(books, actions)}
+      </div>
+    );
+  }
+}
 
 SearchResults.propTypes = {
   actions: PropTypes.object.isRequired,

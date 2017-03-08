@@ -12,9 +12,7 @@ class BooksApp extends Component {
     const {books, actions} = this.props;
     return (
       <div>
-        <SearchHeader
-          searchBook={actions.requestBooks}
-          />
+        <SearchHeader {...actions}/>
         <SearchResults
           books={books}
           actions={actions}

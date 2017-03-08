@@ -7,9 +7,9 @@ class SearchHeader extends Component {
     this.handleSearch = this.handleSearch.bind(this);
   }
 
-  handleSearch(text) {
-    if (text) {
-      this.props.searchBook(text);
+  handleSearch(filter) {
+    if (filter && filter.text) {
+      this.props.requestBooks(filter);
     }
   }
 
@@ -25,7 +25,7 @@ class SearchHeader extends Component {
 }
 
 SearchHeader.propTypes = {
-  searchBook: PropTypes.func.isRequired
+  requestBooks: PropTypes.func.isRequired
 };
 
 export default SearchHeader;

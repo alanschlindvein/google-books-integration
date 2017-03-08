@@ -12,7 +12,7 @@ class BookSearchInput extends Component {
   }
 
   handleSearch() {
-    this.props.onSearch(this.state.text);
+    this.props.onSearch({text: this.state.text, startIndex: 0});
   }
 
   handleChangeInput(event) {
@@ -22,9 +22,10 @@ class BookSearchInput extends Component {
   handleSubmit(event) {
     const text = event.target.value.trim();
     if (event.which === 13) {
-      this.props.onSearch(text);
+      this.props.onSearch({text, startIndex: 0});
     }
   }
+
   render() {
     return (
       <div>

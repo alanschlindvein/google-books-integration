@@ -3,12 +3,12 @@ import {BOOKS, books} from '../actions';
 import api from '../services';
 
 function * fetchBooks(action) {
-  const text = action.text;
+  const {text, startIndex} = action;
   try {
-    const booksResponse = yield call(api.getBooks, text);
-    yield put(books.success(text, booksResponse));
+    const booksResponse = yield call(api.getBooks, {text, startIndex});
+    yield put(books.success({text, startIndex}, booksResponse));
   } catch (error) {
-    yield put(books.failure(text, error));
+    yield put(books.failure({text, startIndex}, error));
   }
 }
 

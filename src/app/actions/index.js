@@ -19,8 +19,8 @@ function action(type, payload = {}) {
 }
 
 export const books = {
-  request: text => action(BOOKS.REQUEST, {text}),
-  success: (text, books) => action(BOOKS.SUCCESS, {text, books}),
+  request: filter => action(BOOKS.REQUEST, filter),
+  success: (filter, books) => action(BOOKS.SUCCESS, {filter, books}),
   failure: (text, error) => action(BOOKS.FAILURE, {text, error})
 };
 
