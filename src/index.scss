@@ -75,3 +75,11 @@ html, body {
     top: 0;
   }
 }
+
+.search-results {
+  &__total-itens {
+    color: #999;
+    text-align: center;
+    margin: 10px 0 5px;
+  }
+}

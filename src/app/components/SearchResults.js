@@ -3,7 +3,14 @@ import BooksList from './BooksList';
 import BookDetails from './BookDetails';
 
 const renderBookList = (books, actions) => (
-  <BooksList booksList={books.searchResult.items} {...actions}/>
+  <div>
+    {books.searchResult.totalItems &&
+    <div className="search-results__total-itens">
+      {`Foram encontrados ${books.searchResult.totalItems} livros`}
+    </div>
+    }
+    <BooksList booksList={books.searchResult.items} {...actions}/>
+  </div>
 );
 
 const renderBookDetails = (books, actions) => (
@@ -14,7 +21,7 @@ const renderBookDetails = (books, actions) => (
 );
 
 const SearchResults = ({books, actions}) => (
-  <div>
+  <div className="search-results">
     {books && books.selectedBook ? renderBookDetails(books, actions) : renderBookList(books, actions)}
   </div>
 );
