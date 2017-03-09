@@ -1,5 +1,8 @@
+/* eslint-disable */
+
 import React, {PropTypes, Component} from 'react';
 import BookSearchInput from './BookSearchInput';
+import FontIcon from 'material-ui/FontIcon';
 
 class SearchHeader extends Component {
   constructor(props) {
@@ -16,6 +19,12 @@ class SearchHeader extends Component {
   render() {
     return (
       <header className="toolbar">
+        <div className="toolbar__icon">
+          <FontIcon className="material-icons">
+            book
+          </FontIcon>
+          <span>Books</span>
+        </div>
         <BookSearchInput
           onSearch={this.handleSearch}
           />

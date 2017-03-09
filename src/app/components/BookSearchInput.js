@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import {RaisedButton} from 'material-ui';
 import ActionSearch from 'material-ui/svg-icons/action/search';
 
 class BookSearchInput extends Component {
@@ -28,20 +27,18 @@ class BookSearchInput extends Component {
 
   render() {
     return (
-      <div>
+      <div className="toolbar__input-group">
         <input
-          className="toolbar__input-search"
+          className="input"
           type="text"
           placeholder="Pesquise um livro..."
           onChange={this.handleChangeInput}
           onKeyDown={this.handleSubmit}
           autoFocus="true"
           />
-        <RaisedButton
-          primary
-          icon={<ActionSearch/>}
-          onTouchTap={this.handleSearch}
-          />
+        <div className="search-button" onClick={this.handleSearch}>
+          <ActionSearch/>
+        </div>
       </div>
     );
   }

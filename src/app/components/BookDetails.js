@@ -72,7 +72,7 @@ class BookDetails extends Component {
 
         <div className="book-details__general">
           <div className="book-details__general-photo">
-            <img src={volumeInfo.imageLinks.smallThumbnail} alt="Book"/>
+            <img src={volumeInfo.imageLinks.thumbnail} alt="Book"/>
           </div>
           <div className="book-details__general-info">
             {volumeInfo.authors && this.renderBookAuthors(volumeInfo.authors)}
