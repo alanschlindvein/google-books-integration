@@ -22,7 +22,7 @@ class SearchResults extends Component {
   renderBookList(books, actions) {
     const PAGE_SIZE = books.filter.maxResults;
     return (
-      <div>
+      <div className="search-results__results-container">
         {books.searchResult.totalItems && this.renderTotalResultMessage(books.searchResult.totalItems)}
 
         <BooksList booksList={books.searchResult.items} {...actions}/>

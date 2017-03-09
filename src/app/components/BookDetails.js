@@ -68,15 +68,22 @@ class BookDetails extends Component {
     const {volumeInfo, accessInfo} = this.props.book;
     return (
       <div className="book-details">
-        <h1>{volumeInfo.title}</h1>
+        <h1 className="book-details__title">{volumeInfo.title}</h1>
 
-        {volumeInfo.authors && this.renderBookAuthors(volumeInfo.authors)}
+        <div className="book-details__general">
+          <div className="book-details__general-photo">
+            <img src={volumeInfo.imageLinks.smallThumbnail} alt="Book"/>
+          </div>
+          <div className="book-details__general-info">
+            {volumeInfo.authors && this.renderBookAuthors(volumeInfo.authors)}
 
-        {volumeInfo.publisher && this.renderDeatail('Editora', volumeInfo.publisher)}
+            {volumeInfo.publisher && this.renderDeatail('Editora', volumeInfo.publisher)}
 
-        {volumeInfo.publishedDate && this.renderDeatail('Publicado em', volumeInfo.publishedDate)}
+            {volumeInfo.publishedDate && this.renderDeatail('Publicado em', volumeInfo.publishedDate)}
 
-        {volumeInfo.pageCount && this.renderDeatail('Páginas', volumeInfo.pageCount)}
+            {volumeInfo.pageCount && this.renderDeatail('Páginas', volumeInfo.pageCount)}
+          </div>
+        </div>
 
         {volumeInfo.description && this.renderDeatail('Descrição', volumeInfo.description)}
 
