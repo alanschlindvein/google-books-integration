@@ -18,8 +18,8 @@ function fetchUrl(url) {
 }
 
 const api = {
-  getBooks(filter) {
-    return fetchUrl(API_ROOT + '?q=' + encodeURI(filter.text) + '&startIndex=' + filter.startIndex);
+  getBooks({text, startIndex}) {
+    return fetchUrl(API_ROOT + '?q=' + encodeURI(text) + '&startIndex=' + startIndex);
   },
   getBookDetails(id) {
     return fetchUrl(API_ROOT + `/${id}`);

@@ -7,7 +7,7 @@ function BooksList({booksList, showBookDetails}) {
       <ul className="list-books">
         {booksList.map(book =>
           <BookCard
-            key={book.id}
+            key={book.etag}
             book={book}
             showBook={showBookDetails}
             />
