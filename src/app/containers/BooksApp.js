@@ -5,8 +5,6 @@ import SearchHeader from '../components/SearchHeader';
 import SearchResults from '../components/SearchResults';
 import * as Actions from '../actions/index';
 
-import '../../index.scss';
-
 class BooksApp extends Component {
   render() {
     const {books, actions} = this.props;

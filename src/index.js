@@ -7,6 +7,8 @@ import App from './app/containers/App';
 import configureStore from './app/store/configureStore';
 import rootSaga from './app/sagas';
 
+import './index.scss';
+
 const store = configureStore();
 store.runSaga(rootSaga);
 
