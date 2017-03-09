@@ -9,7 +9,7 @@ class BookCard extends React.Component {
   }
 
   handleBookCardClick() {
-    this.props.showBook(this.props.book);
+    this.props.showBook(this.props.book.id);
   }
 
   render() {

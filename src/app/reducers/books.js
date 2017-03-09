@@ -23,7 +23,7 @@ export default function books(state = initialState, action) {
     return {...state, searchResult, filter};
   }
 
-  if (actionType === ActionTypes.OPEN_BOOK_DETAILS) {
+  if (actionType === ActionTypes.BOOK_DETAILS.SUCCESS) {
     return {...state, selectedBook: action.book};
   }
 

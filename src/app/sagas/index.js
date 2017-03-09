@@ -1,19 +1,31 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
-import {BOOKS, books} from '../actions';
+import {BOOKS, books, BOOK_DETAILS, bookDetails} from '../actions';
 import api from '../services';
 
-function * fetchBooks(action) {
-  const {text, startIndex} = action;
+function * apiSaga(fn, args, successAction, errorAction) {
   try {
-    const booksResponse = yield call(api.getBooks, {text, startIndex});
-    yield put(books.success({text, startIndex}, booksResponse));
-  } catch (error) {
-    yield put(books.failure({text, startIndex}, error));
+    const response = yield call(fn, ...args);
+    yield put(successAction({...args}, response));
+  } catch ({error}) {
+    yield put(errorAction(error));
   }
 }
 
-function * mySaga() {
-  yield takeEvery(BOOKS.REQUEST, fetchBooks);
+function * fetchBooks(action) {
+  const {text, startIndex} = action;
+  yield * apiSaga(api.getBooks, [{text, startIndex}], books.success, books.failure);
 }
 
-export default mySaga;
+function * fetchBooksDetails(action) {
+  const {id} = action;
+  yield * apiSaga(api.getBookDetails, [id], bookDetails.success, bookDetails.failure);
+}
+
+function * watchMany() {
+  yield [
+    takeEvery(BOOKS.REQUEST, fetchBooks),
+    takeEvery(BOOK_DETAILS.REQUEST, fetchBooksDetails)
+  ];
+}
+
+export default watchMany;

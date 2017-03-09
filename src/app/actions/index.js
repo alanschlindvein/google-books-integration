@@ -10,8 +10,8 @@ function createRequestTypes(base) {
 }
 
 export const BOOKS = createRequestTypes('BOOKS');
+export const BOOK_DETAILS = createRequestTypes('BOOK_DETAILS');
 
-export const OPEN_BOOK_DETAILS = 'OPEN_BOOK_DETAILS';
 export const CLOSE_BOOK_DETAILS = 'CLOSE_BOOK_DETAILS';
 
 function action(type, payload = {}) {
@@ -24,6 +24,14 @@ export const books = {
   failure: (text, error) => action(BOOKS.FAILURE, {text, error})
 };
 
+export const bookDetails = {
+  request: id => action(BOOK_DETAILS.REQUEST, {id}),
+  success: (id, book) => action(BOOK_DETAILS.SUCCESS, {id, book}),
+  failure: (id, error) => action(BOOK_DETAILS.FAILURE, {id, error})
+};
+
 export const requestBooks = books.request;
-export const showBookDetails = book => action(OPEN_BOOK_DETAILS, {book});
+
+export const showBookDetails = bookDetails.request;
 export const closeBookDetails = () => action(CLOSE_BOOK_DETAILS);
+
