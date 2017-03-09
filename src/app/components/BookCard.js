@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import {Card, CardHeader, CardText} from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 
 class BookCard extends React.Component {
@@ -19,17 +18,23 @@ class BookCard extends React.Component {
     const bookCardSubtitle = (publisher || '') + (publishedDate ? ' (' + publishedDate + ')' : '');
     const cardHeader = {title, subtitle: bookCardSubtitle};
     if (imageLinks) {
+      // TODO - ver quando nao tiver imagem
       cardHeader.avatar = <Avatar src={imageLinks.thumbnail} size={60}/>;
     }
 
+    // TODO - Colocar classe de selected quando for o selecionado
+    const bookCardClassName = 'list-books__book-card selected';
     return (
-      <li className="list-books__book-card">
-        <Card onClick={this.handleBookCardClick}>
-          <CardHeader
-            {...cardHeader}
-            />
-          {book.searchInfo && <CardText>{book.searchInfo.textSnippet}</CardText>}
-        </Card>
+      <li className={bookCardClassName} onClick={this.handleBookCardClick}>
+        <div className="image-container">
+          <img src={imageLinks.thumbnail} alt=""/>
+        </div>
+        <div className="info-container">
+          <h4>{cardHeader.title}</h4>
+          <h5>{cardHeader.subtitle}</h5>
+          {book.searchInfo && <span>{book.searchInfo.textSnippet}</span>}
+        </div>
+        <div className="clearfix"/>
       </li>
     );
   }

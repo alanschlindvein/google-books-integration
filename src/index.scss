@@ -8,20 +8,32 @@
   }
 }
 
+$colorPrimary: rgb(0, 188, 212);
+
+.clearfix {
+  @include clearfix;
+}
+
 * {
   box-sizing: border-box;
 }
 
 html, body {
+  @import url('https://fonts.googleapis.com/css?family=Roboto');
+  font-family: 'Roboto', sans-serif;
+
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .toolbar {
-  background: #ccc;
+  background: $colorPrimary;
   padding: 15px 0;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px, rgba(0, 0, 0, 0.117647) 0 1px 4px;
+  z-index: 4;
+  position: relative;
 
   &__input-search {
     padding: 0 10px;
@@ -34,14 +46,69 @@ html, body {
 }
 
 .list-books {
+  position: relative;
   padding: 0 15px;
   list-style: none;
 
   &__book-card {
+    position: relative;
+    padding: 15px;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 1px 2px #ccc;
     cursor: pointer;
+
+    &.selected {
+      &:after {
+        position: absolute;
+        top: 15px;
+        right: -8px;
+        content: "\f0da";
+        font-family: FontAwesome;
+        color: #fff;
+        font-size: 30px;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 2px 4px #ccc;
+
+      .info-container h4 {
+        color: $colorPrimary;
+      }
+    }
 
     & + & {
       margin-top: 15px;
+    }
+
+    .image-container {
+      float: left;
+      margin-right: 15px;
+
+      img {
+        width: 100px;
+        border: 1px solid #ccc;
+      }
+    }
+
+    .info-container {
+      float: right;
+      width: calc(100% - 115px);
+
+      h4 {
+        margin: 0 0 5px;
+        font-weight: 700;
+      }
+      h5 {
+        margin: 0 0 15px;
+        font-weight: normal;
+        color: #666;
+      }
+      span {
+        font-size: 13px;
+        color: #666;
+      }
     }
   }
 }
@@ -53,6 +120,7 @@ html, body {
 
   &__title {
     max-width: calc(100% - 48px);
+    margin-bottom: 15px;
   }
 
   &__general {
@@ -123,19 +191,23 @@ html, body {
     float: left;
     width: 60%;
     background-color: #eee;
+    overflow-y: auto;
+    height: calc(100vh - 66px);
   }
 
   .book-details {
     right: 0;
-    float: right;
+    position: fixed;
     width: 40%;
     height: 100vh;
+    overflow-y: auto;
   }
 
   &__total-itens {
     color: #999;
     text-align: center;
-    margin: 10px 0 5px;
+    margin: 10px 0 0;
+    font-size: 14px;
   }
 
   &__load-more {
