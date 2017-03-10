@@ -25,7 +25,11 @@ class SearchResults extends Component {
       <div className="search-results__results-container">
         {books.searchResult.totalItems && this.renderTotalResultMessage(books.searchResult.totalItems)}
 
-        <BooksList booksList={books.searchResult.items} {...actions}/>
+        <BooksList
+          booksList={books.searchResult.items}
+          selectedBook={books.selectedBook}
+          {...actions}
+          />
 
         {books.searchResult.totalItems > PAGE_SIZE &&
         <div className="search-results__load-more">

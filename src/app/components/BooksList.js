@@ -1,16 +1,28 @@
 import React, {PropTypes} from 'react';
+import classnames from 'classnames';
 import BookCard from './BookCard';
 
-function BooksList({booksList, showBookDetails}) {
+const isBookSelected = (selectedBook, book) => (
+  selectedBook && selectedBook.id && book && book.id && selectedBook.id === book.id
+);
+
+function BooksList({booksList, showBookDetails, selectedBook}) {
   return (
     <div>
       <ul className="list-books">
         {booksList.map(book =>
-          <BookCard
+          <li
             key={book.etag}
-            book={book}
-            showBook={showBookDetails}
-            />
+            className={classnames(
+              'list-books__item',
+              {selected: isBookSelected(selectedBook, book)}
+            )}
+            >
+            <BookCard
+              book={book}
+              showBook={showBookDetails}
+              />
+          </li>
         )}
       </ul>
     </div>
@@ -19,7 +31,8 @@ function BooksList({booksList, showBookDetails}) {
 
 BooksList.propTypes = {
   booksList: PropTypes.array.isRequired,
-  showBookDetails: PropTypes.func.isRequired
+  showBookDetails: PropTypes.func.isRequired,
+  selectedBook: PropTypes.object
 };
 
 export default BooksList;

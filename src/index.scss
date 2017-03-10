@@ -39,16 +39,16 @@ html, body {
     float: left;
     margin: 3px 0 0 15px;
 
-    span{
+    span {
       color: #fff !important;
       font-size: 24px !important;
-      float:left;
+      float: left;
       font-weight: 700;
     }
-    span.material-icons{
+    span.material-icons {
       color: #fff !important;
       font-size: 29px !important;
-      float:left;
+      float: left;
       font-weight: normal;
 
     }
@@ -79,27 +79,77 @@ html, body {
       background: #f2f2f2;
       cursor: pointer;
 
-      svg{
+      svg {
         margin-top: 6px;
       }
     }
   }
 }
 
+.book-card {
+  padding: 15px;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0 1px 2px #ccc;
+
+  &:hover {
+    box-shadow: 0 2px 4px #ccc;
+
+    .info-container h4 {
+      color: $colorPrimary;
+    }
+  }
+
+  .image-container {
+    float: left;
+    margin-right: 15px;
+
+    img {
+      width: 100px;
+      border: 1px solid #ccc;
+    }
+  }
+
+  .info-container {
+    float: right;
+    width: calc(100% - 115px);
+
+    h4 {
+      margin: 0 0 5px;
+      font-weight: 700;
+    }
+    h5 {
+      margin: 0 0 15px;
+      font-weight: normal;
+      color: #666;
+    }
+    span {
+      font-size: 13px;
+      color: #666;
+    }
+  }
+}
+
 .list-books {
+  margin: 0 0 15px;
   position: relative;
   padding: 0 15px;
   list-style: none;
 
-  &__book-card {
+  &__item {
     position: relative;
-    padding: 15px;
-    border-radius: 3px;
-    background: #fff;
-    box-shadow: 0 1px 2px #ccc;
     cursor: pointer;
 
+    & + & {
+      margin-top: 15px;
+    }
+
     &.selected {
+
+      .book-card {
+        box-shadow: 0 1px 2px $colorPrimary;
+      }
+
       &:after {
         position: absolute;
         top: 15px;
@@ -108,47 +158,6 @@ html, body {
         font-family: FontAwesome;
         color: #fff;
         font-size: 30px;
-      }
-    }
-
-    &:hover {
-      box-shadow: 0 2px 4px #ccc;
-
-      .info-container h4 {
-        color: $colorPrimary;
-      }
-    }
-
-    & + & {
-      margin-top: 15px;
-    }
-
-    .image-container {
-      float: left;
-      margin-right: 15px;
-
-      img {
-        width: 100px;
-        border: 1px solid #ccc;
-      }
-    }
-
-    .info-container {
-      float: right;
-      width: calc(100% - 115px);
-
-      h4 {
-        margin: 0 0 5px;
-        font-weight: 700;
-      }
-      h5 {
-        margin: 0 0 15px;
-        font-weight: normal;
-        color: #666;
-      }
-      span {
-        font-size: 13px;
-        color: #666;
       }
     }
   }
@@ -174,7 +183,7 @@ html, body {
       text-align: left;
       margin-right: 20px;
 
-      img{
+      img {
         border: solid 1px #ccc;
         min-width: 128px;
       }
@@ -192,11 +201,11 @@ html, body {
       display: block;
       font-weight: 600;
       font-size: 13px;
-      color: rgba(0,0,0,.5)
+      color: rgba(0, 0, 0, .5)
     }
 
-    span{
-      font-size:14px;
+    span {
+      font-size: 14px;
 
     }
   }
@@ -260,7 +269,7 @@ html, body {
   &__total-itens {
     color: #999;
     text-align: center;
-    margin: 10px 0 0;
+    margin: 10px 0;
     font-size: 14px;
   }
 
@@ -270,7 +279,7 @@ html, body {
   }
 }
 
-@media  (max-width: 768px){
+@media (max-width: 768px) {
 
   .search-results__results-container {
     float: left;

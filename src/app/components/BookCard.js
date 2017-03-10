@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
-import Avatar from 'material-ui/Avatar';
+
+const IMAGE_NOT_FOUND_PATH = 'https://www.hachettebookgroup.com/_b2c/static/site_theme/img/missingbook.png';
 
 class BookCard extends React.Component {
   constructor(props) {
@@ -17,17 +18,13 @@ class BookCard extends React.Component {
 
     const bookCardSubtitle = (publisher || '') + (publishedDate ? ' (' + publishedDate + ')' : '');
     const cardHeader = {title, subtitle: bookCardSubtitle};
-    if (imageLinks) {
-      // TODO - ver quando nao tiver imagem
-      cardHeader.avatar = <Avatar src={imageLinks.thumbnail} size={60}/>;
-    }
 
-    // TODO - Colocar classe de selected quando for o selecionado
-    const bookCardClassName = 'list-books__book-card selected';
+    const bookImage = imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : IMAGE_NOT_FOUND_PATH;
+
     return (
-      <li className={bookCardClassName} onClick={this.handleBookCardClick}>
+      <div className="book-card" onClick={this.handleBookCardClick}>
         <div className="image-container">
-          <img src={imageLinks.thumbnail} alt=""/>
+          <img src={bookImage} alt={cardHeader.title}/>
         </div>
         <div className="info-container">
           <h4>{cardHeader.title}</h4>
@@ -35,7 +32,7 @@ class BookCard extends React.Component {
           {book.searchInfo && <span>{book.searchInfo.textSnippet}</span>}
         </div>
         <div className="clearfix"/>
-      </li>
+      </div>
     );
   }
 }
