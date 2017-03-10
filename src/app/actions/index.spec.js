@@ -66,11 +66,11 @@ describe('books actions', () => {
   });
 
   it('toggleFavorite should be equal toggleFavoriteBook.request action', () => {
-    expect(actions.toggleFavorite).toBe(actions.toggleFavoriteBook.request)
+    expect(actions.toggleFavorite).toBe(actions.toggleFavoriteBook.request);
   });
 
   it('requestBooks should be equal books.request action', () => {
-    expect(actions.requestBooks).toBe(actions.books.request)
+    expect(actions.requestBooks).toBe(actions.books.request);
   });
 
   it('clearBooks should create CLEAR_BOOKS action', () => {
@@ -80,7 +80,7 @@ describe('books actions', () => {
   });
 
   it('showBookDetails should be equal bookDetails.request action', () => {
-    expect(actions.showBookDetails).toBe(actions.bookDetails.request)
+    expect(actions.showBookDetails).toBe(actions.bookDetails.request);
   });
 
   it('closeBookDetails should create CLOSE_BOOK_DETAILS action', () => {

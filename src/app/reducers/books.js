@@ -10,22 +10,7 @@ export default function books(state = initialState, action) {
   const actionType = action.type;
 
   if (actionType === ActionTypes.BOOKS.SUCCESS) {
-    // TODO - refatorar depois
-    const filter = {
-      maxResults: state.filter.maxResults,
-      text: action.filter.text,
-      startIndex: action.filter.startIndex
-    };
-    const oldItems = state.filter.text === action.filter.text ? state.searchResult.items : [];
-    const searchResult = action.books;
-    searchResult.items = oldItems.concat(action.books.items);
-
-    let selectedBook = state.selectedBook;
-    if (!oldItems.length) {
-      selectedBook = null;
-    }
-
-    return {...state, searchResult, filter, selectedBook};
+    return handleBookSuccess(state, action);
   }
 
   if (actionType === ActionTypes.BOOK_DETAILS.SUCCESS) {
@@ -42,3 +27,21 @@ export default function books(state = initialState, action) {
 
   return state;
 }
+
+const handleStateFilter = (stateFilter, actionFilter) => ({
+  maxResults: stateFilter.maxResults,
+  text: actionFilter.text,
+  startIndex: actionFilter.startIndex
+});
+
+function handleBookSuccess(state, action) {
+  const filter = handleStateFilter(state.filter, action.filter);
+  const oldItems = state.filter.text === action.filter.text ? state.searchResult.items : [];
+  const searchResult = action.books;
+  searchResult.items = [...oldItems, ...action.books.items];
+
+  const selectedBook = oldItems.length ? state.selectedBook : null;
+
+  return {...state, searchResult, filter, selectedBook};
+}
+
