@@ -1,6 +1,5 @@
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-import FontIcon from 'material-ui/FontIcon';
 import SearchHeader from './SearchHeader';
 import BookSearchInput from './BookSearchInput';
 
@@ -20,7 +19,6 @@ function setup() {
     renderer
   };
 }
-
 
 describe('components', () => {
   describe('SearchHeader', () => {
