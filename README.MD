@@ -1,3 +1,5 @@
+https://santosguilherme.github.io/google-books-integration/dist/
+
 https://developers.google.com/books/docs/overview
 
 https://developers.google.com/books/docs/v1/getting_started

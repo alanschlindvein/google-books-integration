@@ -1,8 +1,9 @@
-/* eslint-disable react/forbid-component-props */
+/* eslint-disable react/forbid-component-props, react/no-danger */
 
 import React, {PropTypes} from 'react';
 import FontIcon from 'material-ui/FontIcon';
 import {IMAGE_NOT_FOUND_PATH} from '../constants';
+import Moment from 'react-moment';
 
 class BookCard extends React.Component {
   constructor(props) {
@@ -25,9 +26,7 @@ class BookCard extends React.Component {
   render() {
     const {book, favorited} = this.props;
     const {title, publisher, publishedDate, imageLinks} = book.volumeInfo;
-
-    const bookCardSubtitle = (publisher || '') + (publishedDate ? ' (' + publishedDate + ')' : '');
-    const cardHeader = {title, subtitle: bookCardSubtitle};
+    const cardHeader = {title};
 
     const bookImageUrl = imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : IMAGE_NOT_FOUND_PATH;
 
@@ -41,8 +40,12 @@ class BookCard extends React.Component {
             {cardHeader.title}
             {favorited && this.renderFavoriteIcon()}
           </h4>
-          <h5>{cardHeader.subtitle}</h5>
-          {book.searchInfo && <span>{book.searchInfo.textSnippet}</span>}
+          <h5>
+            {publisher || ''}
+            {publisher && publishedDate && ' - '}
+            {publishedDate && <Moment format="YYYY">{publishedDate}</Moment>}
+          </h5>
+          {book.searchInfo && <span dangerouslySetInnerHTML={{__html: book.searchInfo.textSnippet}}/>}
         </div>
         <div className="clearfix"/>
       </div>

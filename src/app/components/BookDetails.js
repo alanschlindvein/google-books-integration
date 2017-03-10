@@ -1,4 +1,4 @@
-/* eslint-disable react/forbid-component-props */
+/* eslint-disable react/forbid-component-props, react/no-danger */
 
 import React, {PropTypes, Component} from 'react';
 import FontIcon from 'material-ui/FontIcon';
@@ -6,6 +6,7 @@ import IconButton from 'material-ui/IconButton';
 import ContentClear from 'material-ui/svg-icons/content/clear';
 import FlatButton from 'material-ui/FlatButton';
 import {IMAGE_NOT_FOUND_PATH} from '../constants';
+import Moment from 'react-moment';
 
 class BookDetails extends Component {
   constructor(props) {
@@ -52,11 +53,29 @@ class BookDetails extends Component {
     );
   }
 
-  renderDeatail(label, value) {
+  renderDetail(label, value) {
     return (
       <div className="book-details__item">
         <label>{label}</label>
-        <span>{value}</span>
+        <span dangerouslySetInnerHTML={{__html: value}}/>
+      </div>
+    );
+  }
+
+  renderDescription(value) {
+    return (
+      <div className="book-details__item">
+        <label>{'Descrição'}</label>
+        <span dangerouslySetInnerHTML={{__html: value}}/>
+      </div>
+    );
+  }
+
+  renderPublishedDateDetail(value) {
+    return (
+      <div className="book-details__item">
+        <label>{'Publicado em'}</label>
+        <Moment format="YYYY">{value}</Moment>
       </div>
     );
   }
@@ -95,15 +114,15 @@ class BookDetails extends Component {
           <div className="book-details__general-info">
             {volumeInfo.authors && this.renderBookAuthors(volumeInfo.authors)}
 
-            {volumeInfo.publisher && this.renderDeatail('Editora', volumeInfo.publisher)}
+            {volumeInfo.publisher && this.renderDetail('Editora', volumeInfo.publisher)}
 
-            {volumeInfo.publishedDate && this.renderDeatail('Publicado em', volumeInfo.publishedDate)}
+            {volumeInfo.publishedDate && this.renderPublishedDateDetail(volumeInfo.publishedDate)}
 
-            {volumeInfo.pageCount && this.renderDeatail('Páginas', volumeInfo.pageCount)}
+            {volumeInfo.pageCount && this.renderDetail('Páginas', volumeInfo.pageCount)}
           </div>
         </div>
 
-        {volumeInfo.description && this.renderDeatail('Descrição', volumeInfo.description)}
+        {volumeInfo.description && this.renderDescription(volumeInfo.description)}
 
         {this.renderButtonCloseDetails()}
       </div>
