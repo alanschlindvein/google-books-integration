@@ -19,12 +19,12 @@ class BookCard extends React.Component {
     const bookCardSubtitle = (publisher || '') + (publishedDate ? ' (' + publishedDate + ')' : '');
     const cardHeader = {title, subtitle: bookCardSubtitle};
 
-    const bookImage = imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : IMAGE_NOT_FOUND_PATH;
+    const bookImageUrl = imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : IMAGE_NOT_FOUND_PATH;
 
     return (
       <div className="book-card" onClick={this.handleBookCardClick}>
         <div className="image-container">
-          <img src={bookImage} alt={cardHeader.title}/>
+          <img src={bookImageUrl} alt={cardHeader.title}/>
         </div>
         <div className="info-container">
           <h4>{cardHeader.title}</h4>

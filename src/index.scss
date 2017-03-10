@@ -167,6 +167,7 @@ html, body {
   position: relative;
   padding-left: 15px;
   border-left: 1px solid #ccc;
+  transition: all .1s ease;
 
   &__title {
     max-width: calc(100% - 48px);
@@ -185,7 +186,7 @@ html, body {
 
       img {
         border: solid 1px #ccc;
-        min-width: 128px;
+        width: 128px;
       }
     }
     &-info {
@@ -206,7 +207,6 @@ html, body {
 
     span {
       font-size: 14px;
-
     }
   }
 
@@ -250,12 +250,16 @@ html, body {
 .search-results {
   position: relative;
 
-  &__results-container {
+  &__content {
     float: left;
-    width: 60%;
+    width: 100%;
     background-color: #eee;
     overflow-y: auto;
-    height: calc(100vh - 66px);
+    height: calc(100vh - 68px);
+
+    &.min {
+      width: 60%;
+    }
   }
 
   .book-details {
@@ -281,22 +285,28 @@ html, body {
 
 @media (max-width: 768px) {
 
-  .search-results__results-container {
-    float: left;
-    width: 100%;
-  }
+  .search-results {
 
-  .search-results .book-details {
-    width: 100vw;
-    position: fixed;
-    height: 100vh;
-    overflow-y: auto;
-    background: #fff;
-    padding: 15px;
-  }
+    &__content {
+      float: left;
+      width: 100%;
 
-  h1.book-details__title {
-    margin-top: 0;
-  }
+      .min {
+        width: 0;
+      }
+    }
 
+    .book-details {
+      width: 100vw;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      background: #fff;
+      padding: 15px;
+
+      &__title {
+        margin-top: 0;
+      }
+    }
+  }
 }

@@ -4,6 +4,8 @@ import IconButton from 'material-ui/IconButton';
 import ContentClear from 'material-ui/svg-icons/content/clear';
 import ActionOpenInNew from 'material-ui/svg-icons/action/open-in-new';
 
+const IMAGE_NOT_FOUND_PATH = 'https://www.hachettebookgroup.com/_b2c/static/site_theme/img/missingbook.png';
+
 class BookDetails extends Component {
   constructor(props) {
     super(props);
@@ -66,13 +68,15 @@ class BookDetails extends Component {
 
   render() {
     const {volumeInfo, accessInfo} = this.props.book;
+    const {imageLinks} = volumeInfo;
+    const bookImageUrl = imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : IMAGE_NOT_FOUND_PATH;
     return (
       <div className="book-details">
         <h1 className="book-details__title">{volumeInfo.title}</h1>
 
         <div className="book-details__general">
           <div className="book-details__general-photo">
-            <img src={volumeInfo.imageLinks.thumbnail} alt="Book"/>
+            <img src={bookImageUrl} alt={volumeInfo.title}/>
           </div>
           <div className="book-details__general-info">
             {volumeInfo.authors && this.renderBookAuthors(volumeInfo.authors)}

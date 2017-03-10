@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import classnames from 'classnames';
 import BooksList from './BooksList';
 import BookDetails from './BookDetails';
 
@@ -19,10 +20,18 @@ class SearchResults extends Component {
     return <div className="search-results__total-itens">{`Foram encontrados ${totalItems} livros`}</div>;
   }
 
+  isBookDetailsOpened(selectedBook) {
+    return selectedBook && selectedBook.id;
+  }
+
   renderBookList(books, actions) {
-    const PAGE_SIZE = books.filter.maxResults;
+    const {maxResults} = books.filter;
     return (
-      <div className="search-results__results-container">
+      <div
+        className={classnames('search-results__content', {
+          min: this.isBookDetailsOpened(books.selectedBook)
+        })}
+        >
         {books.searchResult.totalItems && this.renderTotalResultMessage(books.searchResult.totalItems)}
 
         <BooksList
@@ -31,7 +40,7 @@ class SearchResults extends Component {
           {...actions}
           />
 
-        {books.searchResult.totalItems > PAGE_SIZE &&
+        {books.searchResult.totalItems > maxResults &&
         <div className="search-results__load-more">
           <RaisedButton
             label="Carregar mais"
