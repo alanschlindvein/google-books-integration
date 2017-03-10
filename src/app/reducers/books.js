@@ -36,5 +36,9 @@ export default function books(state = initialState, action) {
     return {...state, selectedBook: null};
   }
 
+  if (actionType === ActionTypes.CLEAR_BOOKS) {
+    return initialState;
+  }
+
   return state;
 }

@@ -1,29 +1,5 @@
-import 'isomorphic-fetch';
+import _googleBooksApi from './googleBooks';
+import _favoriteBooks from './favoriteBooks';
 
-const API_ROOT = 'https://www.googleapis.com/books/v1/volumes';
-
-function fetchUrl(url) {
-  return fetch(url)
-    .then(response =>
-      response.json().then(json => (
-        {json, response})
-      )
-    ).then(({json, response}) => {
-      if (!response.ok) {
-        return Promise.reject(json);
-      }
-
-      return json;
-    });
-}
-
-const api = {
-  getBooks({text, startIndex}) {
-    return fetchUrl(API_ROOT + '?q=' + encodeURI(text) + '&startIndex=' + startIndex);
-  },
-  getBookDetails(id) {
-    return fetchUrl(API_ROOT + `/${id}`);
-  }
-};
-
-export default api;
+export const googleBooksApi = _googleBooksApi;
+export const favoriteBooks = _favoriteBooks;

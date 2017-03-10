@@ -87,6 +87,7 @@ html, body {
 }
 
 .book-card {
+  position: relative;
   padding: 15px;
   border-radius: 3px;
   background: #fff;
@@ -98,6 +99,12 @@ html, body {
     .info-container h4 {
       color: $colorPrimary;
     }
+  }
+
+  &__favorite {
+    position: absolute;
+    top: 15px;
+    right: 15px;
   }
 
   .image-container {
@@ -145,19 +152,12 @@ html, body {
     }
 
     &.selected {
-
       .book-card {
-        box-shadow: 0 1px 2px $colorPrimary;
-      }
+        border-right: 8px solid $colorPrimary;
 
-      &:after {
-        position: absolute;
-        top: 15px;
-        right: -8px;
-        content: "\f0da";
-        font-family: FontAwesome;
-        color: #fff;
-        font-size: 30px;
+        .info-container h4 {
+          color: $colorPrimary;
+        }
       }
     }
   }
@@ -171,7 +171,11 @@ html, body {
 
   &__title {
     max-width: calc(100% - 48px);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+  }
+
+  &__favorite {
+    margin-bottom: 10px;
   }
 
   &__general {

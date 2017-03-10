@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable react/forbid-component-props */
 
 import React, {PropTypes, Component} from 'react';
 import BookSearchInput from './BookSearchInput';
@@ -13,7 +13,10 @@ class SearchHeader extends Component {
   handleSearch(filter) {
     if (filter && filter.text) {
       this.props.requestBooks(filter);
+      return;
     }
+
+    this.props.clearBooks();
   }
 
   render() {
@@ -34,7 +37,8 @@ class SearchHeader extends Component {
 }
 
 SearchHeader.propTypes = {
-  requestBooks: PropTypes.func.isRequired
+  requestBooks: PropTypes.func.isRequired,
+  clearBooks: PropTypes.func.isRequired
 };
 
 export default SearchHeader;

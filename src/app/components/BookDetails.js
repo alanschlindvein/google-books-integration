@@ -1,18 +1,42 @@
+/* eslint-disable react/forbid-component-props */
+
 import React, {PropTypes, Component} from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import ContentClear from 'material-ui/svg-icons/content/clear';
-import ActionOpenInNew from 'material-ui/svg-icons/action/open-in-new';
+import FlatButton from 'material-ui/FlatButton';
 import {IMAGE_NOT_FOUND_PATH} from '../constants';
 
 class BookDetails extends Component {
   constructor(props) {
     super(props);
     this.handleOnCloseDetails = this.handleOnCloseDetails.bind(this);
+    this.handleToggleFavorite = this.handleToggleFavorite.bind(this);
   }
 
   handleOnCloseDetails() {
     this.props.closeBookDetails();
+  }
+
+  handleToggleFavorite() {
+    const addTo = this.isBookFavorited();
+    this.props.toggleFavorite({id: this.props.book.id, addTo});
+  }
+
+  isBookFavorited() {
+    return (this.props.favorites || []).filter(favoriteId => favoriteId === this.props.book.id).length;
+  }
+
+  renderFavoriteToggleAction() {
+    const isFavorited = this.isBookFavorited();
+    return (
+      <FlatButton
+        label={isFavorited ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
+        secondary
+        icon={<FontIcon className="material-icons">{isFavorited ? 'star' : 'star_border'}</FontIcon>}
+        onTouchTap={this.handleToggleFavorite}
+        />
+    );
   }
 
   renderBookAuthors(authors) {
@@ -37,20 +61,6 @@ class BookDetails extends Component {
     );
   }
 
-  renderButtonOpenBook(link) {
-    return (
-      <div className="book-details__open-content-container">
-        <RaisedButton
-          label="Ver conteúdo"
-          labelPosition="before"
-          icon={<ActionOpenInNew/>}
-          href={link}
-          target="_blank"
-          />
-      </div>
-    );
-  }
-
   renderButtonCloseDetails() {
     return (
       <div className="book-details__close-button">
@@ -66,12 +76,17 @@ class BookDetails extends Component {
   }
 
   render() {
-    const {volumeInfo, accessInfo} = this.props.book;
+    const {volumeInfo} = this.props.book;
     const {imageLinks} = volumeInfo;
     const bookImageUrl = imageLinks && imageLinks.thumbnail ? imageLinks.thumbnail : IMAGE_NOT_FOUND_PATH;
+
     return (
       <div className="book-details">
         <h1 className="book-details__title">{volumeInfo.title}</h1>
+
+        <div className="book-details__favorite">
+          {this.renderFavoriteToggleAction()}
+        </div>
 
         <div className="book-details__general">
           <div className="book-details__general-photo">
@@ -90,8 +105,6 @@ class BookDetails extends Component {
 
         {volumeInfo.description && this.renderDeatail('Descrição', volumeInfo.description)}
 
-        {accessInfo.webReaderLink && this.renderButtonOpenBook(accessInfo.webReaderLink)}
-
         {this.renderButtonCloseDetails()}
       </div>
     );
@@ -100,7 +113,9 @@ class BookDetails extends Component {
 
 BookDetails.propTypes = {
   book: PropTypes.object.isRequired,
-  closeBookDetails: PropTypes.func.isRequired
+  closeBookDetails: PropTypes.func.isRequired,
+  toggleFavorite: PropTypes.func.isRequired,
+  favorites: PropTypes.array
 };
 
 export default BookDetails;

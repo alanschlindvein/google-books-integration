@@ -1,6 +1,6 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
-import {BOOKS, books, BOOK_DETAILS, bookDetails} from '../actions';
-import api from '../services';
+import {BOOKS, BOOK_DETAILS, TOGGLE_FAVORITE_BOOK, books, bookDetails, toggleFavoriteBook} from '../actions';
+import {googleBooksApi, favoriteBooks} from '../services';
 
 function * apiSaga(fn, parameter, successAction, errorAction) {
   try {
@@ -13,18 +13,24 @@ function * apiSaga(fn, parameter, successAction, errorAction) {
 
 function * fetchBooks(action) {
   const {text, startIndex} = action;
-  yield * apiSaga(api.getBooks, {text, startIndex}, books.success, books.failure);
+  yield * apiSaga(googleBooksApi.getBooks, {text, startIndex}, books.success, books.failure);
 }
 
 function * fetchBooksDetails(action) {
   const {id} = action;
-  yield * apiSaga(api.getBookDetails, id, bookDetails.success, bookDetails.failure);
+  yield * apiSaga(googleBooksApi.getBookDetails, id, bookDetails.success, bookDetails.failure);
+}
+
+function * toggleFavorite(action) {
+  const favoritesArray = favoriteBooks.toggleFavorite(action.id);
+  yield put(toggleFavoriteBook.success({id: action.id, favorites: favoritesArray}));
 }
 
 function * watchMany() {
   yield [
     takeEvery(BOOKS.REQUEST, fetchBooks),
-    takeEvery(BOOK_DETAILS.REQUEST, fetchBooksDetails)
+    takeEvery(BOOK_DETAILS.REQUEST, fetchBooksDetails),
+    takeEvery(TOGGLE_FAVORITE_BOOK.REQUEST, toggleFavorite)
   ];
 }
 

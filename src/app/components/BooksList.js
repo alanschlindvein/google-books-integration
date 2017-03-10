@@ -6,7 +6,11 @@ const isBookSelected = (selectedBook, book) => (
   selectedBook && selectedBook.id && book && book.id && selectedBook.id === book.id
 );
 
-function BooksList({booksList, showBookDetails, selectedBook}) {
+const isBookFavorited = (favorites, bookId) => (
+  (favorites || []).filter(favoriteId => favoriteId === bookId).length > 0
+);
+
+function BooksList({booksList, showBookDetails, selectedBook, favorites}) {
   return (
     <div>
       <ul className="list-books">
@@ -21,6 +25,7 @@ function BooksList({booksList, showBookDetails, selectedBook}) {
             <BookCard
               book={book}
               showBook={showBookDetails}
+              favorited={isBookFavorited(favorites, book.id)}
               />
           </li>
         )}
@@ -32,7 +37,8 @@ function BooksList({booksList, showBookDetails, selectedBook}) {
 BooksList.propTypes = {
   booksList: PropTypes.array.isRequired,
   showBookDetails: PropTypes.func.isRequired,
-  selectedBook: PropTypes.object
+  selectedBook: PropTypes.object,
+  favorites: PropTypes.array
 };
 
 export default BooksList;

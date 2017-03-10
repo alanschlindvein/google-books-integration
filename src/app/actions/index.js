@@ -11,8 +11,10 @@ function createRequestTypes(base) {
 
 export const BOOKS = createRequestTypes('BOOKS');
 export const BOOK_DETAILS = createRequestTypes('BOOK_DETAILS');
+export const TOGGLE_FAVORITE_BOOK = createRequestTypes('TOGGLE_FAVORITE_BOOK');
 
 export const CLOSE_BOOK_DETAILS = 'CLOSE_BOOK_DETAILS';
+export const CLEAR_BOOKS = 'CLEAR_BOOKS';
 
 function action(type, payload = {}) {
   return {type, ...payload};
@@ -30,7 +32,15 @@ export const bookDetails = {
   failure: (id, error) => action(BOOK_DETAILS.FAILURE, {id, error})
 };
 
+export const toggleFavoriteBook = {
+  request: filter => action(TOGGLE_FAVORITE_BOOK.REQUEST, filter),
+  success: filter => action(TOGGLE_FAVORITE_BOOK.SUCCESS, filter)
+};
+
+export const toggleFavorite = toggleFavoriteBook.request;
+
 export const requestBooks = books.request;
+export const clearBooks = () => action(CLEAR_BOOKS);
 
 export const showBookDetails = bookDetails.request;
 export const closeBookDetails = () => action(CLOSE_BOOK_DETAILS);

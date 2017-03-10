@@ -37,6 +37,7 @@ class SearchResults extends Component {
         <BooksList
           booksList={books.searchResult.items}
           selectedBook={books.selectedBook}
+          favorites={this.props.favorites}
           {...actions}
           />
 
@@ -57,7 +58,11 @@ class SearchResults extends Component {
     return (
       <div>
         {this.renderBookList(books, actions)}
-        <BookDetails book={books.selectedBook} {...actions}/>
+        <BookDetails
+          book={books.selectedBook}
+          favorites={this.props.favorites}
+          {...actions}
+          />
       </div>
     );
   }
@@ -74,7 +79,8 @@ class SearchResults extends Component {
 
 SearchResults.propTypes = {
   actions: PropTypes.object.isRequired,
-  books: PropTypes.object.isRequired
+  books: PropTypes.object.isRequired,
+  favorites: PropTypes.array
 };
 
 export default SearchResults;
