@@ -1,4 +1,5 @@
 import {TOGGLE_FAVORITE_BOOK} from '../actions';
+import {favoriteBooks} from '../services';
 
 const initialState = getInitialState();
 
@@ -13,5 +14,5 @@ export default function books(state = initialState, action) {
 }
 
 function getInitialState() {
-  return [];
+  return favoriteBooks.getFavoriteBooks() || [];
 }
