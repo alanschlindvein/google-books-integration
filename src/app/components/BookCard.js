@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react';
-
-const IMAGE_NOT_FOUND_PATH = 'https://www.hachettebookgroup.com/_b2c/static/site_theme/img/missingbook.png';
+import {IMAGE_NOT_FOUND_PATH} from '../constants';
 
 class BookCard extends React.Component {
   constructor(props) {

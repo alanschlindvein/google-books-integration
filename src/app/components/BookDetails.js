@@ -3,8 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import ContentClear from 'material-ui/svg-icons/content/clear';
 import ActionOpenInNew from 'material-ui/svg-icons/action/open-in-new';
-
-const IMAGE_NOT_FOUND_PATH = 'https://www.hachettebookgroup.com/_b2c/static/site_theme/img/missingbook.png';
+import {IMAGE_NOT_FOUND_PATH} from '../constants';
 
 class BookDetails extends Component {
   constructor(props) {

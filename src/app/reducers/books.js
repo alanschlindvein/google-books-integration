@@ -20,7 +20,12 @@ export default function books(state = initialState, action) {
     const searchResult = action.books;
     searchResult.items = oldItems.concat(action.books.items);
 
-    return {...state, searchResult, filter};
+    let selectedBook = state.selectedBook;
+    if (!oldItems.length) {
+      selectedBook = null;
+    }
+
+    return {...state, searchResult, filter, selectedBook};
   }
 
   if (actionType === ActionTypes.BOOK_DETAILS.SUCCESS) {
