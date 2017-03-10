@@ -1,0 +1,33 @@
+$colorPrimary: rgb(0, 188, 212);
+
+.clearfix {
+  @include clearfix;
+}
+
+@media (max-width: 768px) {
+
+  .search-results {
+
+    &__content {
+      float: left;
+      width: 100%;
+
+      .min {
+        width: 0;
+      }
+    }
+
+    .book-details {
+      width: 100vw;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+      background: #fff;
+      padding: 15px;
+
+      &__title {
+        margin-top: 0;
+      }
+    }
+  }
+}

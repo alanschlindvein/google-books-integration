@@ -1,0 +1,25 @@
+.list-books {
+  margin: 0 0 15px;
+  position: relative;
+  padding: 0 15px;
+  list-style: none;
+
+  &__item {
+    position: relative;
+    cursor: pointer;
+
+    & + & {
+      margin-top: 15px;
+    }
+
+    &.selected {
+      .book-card {
+        border-right: 8px solid $colorPrimary;
+
+        .info-container h4 {
+          color: $colorPrimary;
+        }
+      }
+    }
+  }
+}

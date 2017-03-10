@@ -1,0 +1,35 @@
+.search-results {
+  position: relative;
+
+  &__content {
+    float: left;
+    width: 100%;
+    background-color: #eee;
+    overflow-y: auto;
+    height: calc(100vh - 68px);
+
+    &.min {
+      width: 60%;
+    }
+  }
+
+  .book-details {
+    right: 0;
+    position: fixed;
+    width: 40%;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  &__total-itens {
+    color: #999;
+    text-align: center;
+    margin: 10px 0;
+    font-size: 14px;
+  }
+
+  &__load-more {
+    text-align: center;
+    margin: 15px 0;
+  }
+}
